@@ -1,5 +1,6 @@
 import pygame
 from personagem import Cubo
+from inimigo import Inimigo
 
 #pip install pygame
 
@@ -7,9 +8,16 @@ LARGURA = 1000
 ALTURA = 800
 JANELA = pygame.display.set_mode([LARGURA, ALTURA])
 
+
+
+
 jogando = True
 
 cubo = Cubo(100, 100)
+
+inimigos = []
+
+inimigos.append(Inimigo(LARGURA / 2, 100))
 
 def gestao_teclas(teclas):
     if teclas[pygame.K_w]:
@@ -27,6 +35,8 @@ while jogando:
 
     teclas = pygame.key.get_pressed()
 
+
+
     gestao_teclas(teclas)
 
     for evento in eventos:
@@ -35,6 +45,11 @@ while jogando:
 
     JANELA.fill("black")
     cubo.desenhar(JANELA)
+
+    for inimigo in inimigos:
+        inimigo.desenhar(JANELA)
+        inimigo.movimentar()
+
     pygame.display.update()
 
 quit()
